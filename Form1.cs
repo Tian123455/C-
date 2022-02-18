@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace _02计算器
+namespace _03猜拳游戏
 {
     public partial class Form1 : Form
     {
@@ -16,26 +16,70 @@ namespace _02计算器
             InitializeComponent();
         }
 
-        private void btnJiSuan_Click(object sender, EventArgs e)
+        //石头
+        private void button1_Click(object sender, EventArgs e)
         {
-            
+            //把sender显示类型转换为button
 
+            //this
 
-            // 采集用户的输入
-            int n1 = Convert.ToInt32(txtNum1.Text.Trim());
-            int n2 = int.Parse(txtNum2.Text.Trim());
-            Calculator cal = new Calculator(n1, n2);
-            switch (cboCaoZuoFu.Text.Trim())
+            Button btn = (Button)sender;
+            if (btn != null)
             {
-                case "+":
-                    lblResult.Text = cal.Add().ToString();
-                    break;
-                case "-":
-                    break;
+                UserPlayer u1 = new UserPlayer();
+                int userFist = u1.ShowFist(btn.Text);
+                lblUser.Text = u1.FistName;
+
+                ComputerUser pc1 = new ComputerUser();
+                int computerFist = pc1.ShowFist();
+                lblComputer.Text = pc1.FistName;
+
+                CaiPan cp = new CaiPan();
+                lblResult.Text = cp.IsUserWin(userFist, computerFist);
             }
 
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
 
         }
+
+        private void lblComputer_DoubleClick(object sender, EventArgs e)
+        {
+
+        }
+
+        //DRY原则：Don't Repeat Yourself
+
+        ////点击剪刀
+        //private void button2_Click(object sender, EventArgs e)
+        //{
+        //    UserPlayer u1 = new UserPlayer();
+        //    int userFist = u1.ShowFist(button2.Text);
+        //    lblUser.Text = u1.FistName;
+
+        //    ComputerUser pc1 = new ComputerUser();
+        //    int computerFist = pc1.ShowFist();
+        //    lblComputer.Text = pc1.FistName;
+
+        //    CaiPan cp = new CaiPan();
+        //    lblResult.Text = cp.IsUserWin(userFist, computerFist);
+        //}
+
+        ////布
+        //private void button3_Click(object sender, EventArgs e)
+        //{
+        //    UserPlayer u1 = new UserPlayer();
+        //    int userFist = u1.ShowFist(button3.Text);
+        //    lblUser.Text = u1.FistName;
+
+        //    ComputerUser pc1 = new ComputerUser();
+        //    int computerFist = pc1.ShowFist();
+        //    lblComputer.Text = pc1.FistName;
+
+        //    CaiPan cp = new CaiPan();
+        //    lblResult.Text = cp.IsUserWin(userFist, computerFist);
+        //}
     }
 }
